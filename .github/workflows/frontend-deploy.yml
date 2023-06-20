@@ -18,9 +18,13 @@ jobs:
           key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
           restore-keys: ${{ runner.os }}-frontend-
       - name: Install Frontend Dependencies
-        run: yarn
+        run: npm ci
+      - name: Check current directory
+        run: pwd
+      - name: Check frontend directory
+        run: ls -las
       - name: Build Frontend
-        run: yarn run build
+        run: npm run build
       - name: Upload Frontend Artifact
         uses: actions/upload-artifact@v3
         with:
