@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -18,9 +21,9 @@ jobs:
           key: ${{ runner.os }}-frontend-${{ hashFiles('frontend/package-lock.json') }}
           restore-keys: ${{ runner.os }}-frontend-
       - name: Install Frontend Dependencies
-        run: npm ci --prefix frontend
+        run: npm ci
       - name: Build Frontend
-        run: npm run build --prefix frontend
+        run: npm run build
       - name: Upload Frontend Artifact
         uses: actions/upload-artifact@v3
         with:
