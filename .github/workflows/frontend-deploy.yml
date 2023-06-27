@@ -51,5 +51,9 @@ jobs:
         with:
           name: frontend
           path: frontend/dist
+      - name: Check current directory files
+        run: ls -la
+      - name: Check frontend directory files
+        run: ls -la frontend
       - name: Run AWS CDK Deploy
         run: npx cdk deploy --require-approval never
