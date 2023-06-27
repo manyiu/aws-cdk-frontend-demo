@@ -62,6 +62,7 @@ export class AwsCdkFrontendDemoStack extends cdk.Stack {
             originAccessIdentity,
           }),
         },
+        defaultRootObject: "index.html",
         domainNames: [domainName],
         certificate: domainCertificate,
       }
