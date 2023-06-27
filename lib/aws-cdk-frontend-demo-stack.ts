@@ -53,13 +53,13 @@ export class AwsCdkFrontendDemoStack extends cdk.Stack {
       distribution
     );
 
-    new cdk.aws_route53.ARecord(this, "AliasRecord", {
+    new cdk.aws_route53.ARecord(this, "AAliasRecord", {
       zone: existingHostZone,
       recordName: domainName,
       target: cdk.aws_route53.RecordTarget.fromAlias(cloudfrontTarget),
     });
 
-    new cdk.aws_route53.AaaaRecord(this, "AliasRecord", {
+    new cdk.aws_route53.AaaaRecord(this, "AAAAAliasRecord", {
       zone: existingHostZone,
       recordName: domainName,
       target: cdk.aws_route53.RecordTarget.fromAlias(cloudfrontTarget),
