@@ -37,12 +37,20 @@ export class AwsCdkFrontendDemoStack extends cdk.Stack {
       }
     );
 
+    const originAccessIdentity = new cdk.aws_cloudfront.OriginAccessIdentity(
+      this,
+      "OriginAccessIdentity"
+    );
+    hostingBucket.grantRead(originAccessIdentity);
+
     const distribution = new cdk.aws_cloudfront.Distribution(
       this,
       "Distribution",
       {
         defaultBehavior: {
-          origin: new cdk.aws_cloudfront_origins.S3Origin(hostingBucket),
+          origin: new cdk.aws_cloudfront_origins.S3Origin(hostingBucket, {
+            originAccessIdentity,
+          }),
         },
         domainNames: [domainName],
         certificate: domainCertificate,
