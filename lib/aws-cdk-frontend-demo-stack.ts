@@ -17,6 +17,11 @@ export class AwsCdkFrontendDemoStack extends cdk.Stack {
       autoDeleteObjects: true,
     });
 
+    new cdk.aws_s3_deployment.BucketDeployment(this, "FrontendDeployment", {
+      sources: [cdk.aws_s3_deployment.Source.asset("../frontend/dist")],
+      destinationBucket: hostingBucket,
+    });
+
     const existingHostZone = cdk.aws_route53.HostedZone.fromLookup(
       this,
       "ExistingHostedZone",
