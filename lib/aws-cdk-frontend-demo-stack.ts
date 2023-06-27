@@ -1,6 +1,7 @@
 require("dotenv").config();
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
+import * as path from "path";
 
 const domainName = `${
   process.env.GITHUB_REF_NAME === "main"
@@ -18,7 +19,11 @@ export class AwsCdkFrontendDemoStack extends cdk.Stack {
     });
 
     new cdk.aws_s3_deployment.BucketDeployment(this, "FrontendDeployment", {
-      sources: [cdk.aws_s3_deployment.Source.asset("../frontend/dist")],
+      sources: [
+        cdk.aws_s3_deployment.Source.asset(
+          path.join(__dirname, "..", "frontend", "dist")
+        ),
+      ],
       destinationBucket: hostingBucket,
     });
 
