@@ -3,9 +3,9 @@ import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 
 const domainName = `${
-  process.env.GITHUB_HEAD_REF === "main"
+  process.env.GITHUB_REF_NAME === "main"
     ? ""
-    : process.env.GITHUB_HEAD_REF?.replace("/", "_") + "."
+    : process.env.GITHUB_REF_NAME + "."
 }${process.env.GITHUB_REPOSITORY_ID}.${process.env.HOST_ZONE}`;
 
 export class AwsCdkFrontendDemoStack extends cdk.Stack {
